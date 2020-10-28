@@ -1,23 +1,64 @@
 let gameComplete = false;
 // Define the three constants here
-
+const name = "unknown";
+const score = 0;
+const items = 0;
 // Define the player object here
-
+var player = {
+    name, 
+    score, 
+    items,
+    getCurrentScore() {
+        return score;
+    },
+    addPoints(points){
+        score += points;
+    },
+    deductPoints(points){
+        score -= points;
+    }
+};
 // Define the Product class - write the Constructor function for Product class here
+function Product(id, name, price, expiryDate){
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.expiryDate = expiryDate;
+}
 
 // Complete the dateDiff function
-const dateDiff = (date1, date2) => {};
+const dateDiff = (date1, date2) => {
+    var timeDiff = Math.abs(date2 - date1);
+    var dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 *24));
+    return dayDiff;
+};
 
 // Here, use Object.defineProperty to create property - daysToExpire
-
+Object.defineProperty(Product.prototype, 'daysToExpire', {
+    get: function () {
+        return dateDiff(this.expiryDate, new Date());
+    }
+});
 // Add method getDetails to Product here
-
+Product.getDetails = function(){
+    return `Product Name: ${this.name}, Product Price: ${this.price}`
+}
 // Define the MagicProduct class here
-
+class MagicProduct extends Product {
+    MagicProduct(id, name, price, expiryDate, points, isBonus) {
+        Product.call(this, id, name, price, expiryDate, points, isBonus);
+        this.points = points;
+        this.isBonus = isBonus;
+    }
+}
 // Establish inheritance between Product() & MagicProduct() here
-
+MagicProduct.prototype = Object.create(Product.prototype);
 // Define Rating class here
-
+class Rating {
+    constructor() {
+        this.rate = "";
+    }
+}
 // Complete the loadProducts function
 const loadProducts = (map, prodId) => {
     let a = new Array();
