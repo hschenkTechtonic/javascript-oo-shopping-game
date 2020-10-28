@@ -4,7 +4,7 @@ const name = "unknown";
 const score = 0;
 const items = 0;
 // Define the player object here
-var player = {
+let player = {
     name, 
     score, 
     items,
@@ -12,10 +12,10 @@ var player = {
         return this.score;
     },
     addPoints(points){
-        this.score += points;
+        this.score = this.score + points;
     },
     deductPoints(points){
-        this.score -= points;
+        this.score = this.score - points;
     }
 };
 // Define the Product class - write the Constructor function for Product class here
@@ -41,16 +41,16 @@ Object.defineProperty(Product.prototype, 'daysToExpire', {
 });
 // Add method getDetails to Product here
 Product.prototype.getDetails = function(){
-    return `Product Name: ${this.name}, Product Price: ${this.price}`;
+    return `Product Name: ${this.name} , Product Price: ${this.price}`;
 }
 // Define the MagicProduct class here
 function MagicProduct(id, name, price, expiryDate, points, isBonus){
-    Product.call(this, id, name, price, expiryDate, points, isBonus);
+    Product.call(this, id, name, price, expiryDate);
     this.points = points;
     this.isBonus = isBonus;
 }
 // Establish inheritance between Product() & MagicProduct() here
-MagicProduct.prototype = Object.create(Product);
+MagicProduct.prototype = Object.create(Product.prototype);
 // Define Rating class here
 class Rating {
     constructor() {
