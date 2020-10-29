@@ -272,7 +272,7 @@ const calculatePoints = (prod, tBill) => {
             player.addPoints(prod.points)
         }
         else {
-            player.deductPoints(prod.score);
+            player.deductPoints(prod.points);
         }
     }
 };
